@@ -6,7 +6,7 @@ Name:		libwacom
 Summary:	A library to identify wacom tablets
 Epoch:		1
 Version:	0.28
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group:		Development/X11
 License:	MIT
 URL:		http://sourceforge.net/projects/linuxwacom/
@@ -73,7 +73,8 @@ Development files for %{name}.
 mkdir -p %{buildroot}/%{_udevrulesdir}
 pushd tools
 ./generate-udev-rules > %{buildroot}/%{_udevrulesdir}/65-libwacom.rules
-sed -i '/ignore/d' %{buildroot}/%{_udevrulesdir}/65-libwacom.rules
 popd
+# Remove failed entries from rule file
+sed -i '/failed/d' %{buildroot}/%{_udevrulesdir}/65-libwacom.rules
 
 rm -f %{buildroot}%{_libdir}/*.la
